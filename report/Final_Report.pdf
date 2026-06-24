@@ -1,0 +1,259 @@
+# Employee Attrition Prediction Using Machine Learning
+
+## Abstract
+
+Employee attrition is one of the major challenges faced by organizations. High employee turnover increases recruitment costs, training expenses, and productivity losses. This project aims to predict employee attrition using Machine Learning techniques. The IBM HR Analytics Employee Attrition dataset was used for analysis and model development. Various preprocessing techniques such as data cleaning, categorical encoding, feature scaling, and class balancing using SMOTE were applied. Four machine learning models, namely Logistic Regression, Decision Tree, Random Forest, and XGBoost, were trained and evaluated. The models were compared using Accuracy, Precision, Recall, and F1-Score metrics. Among all models, XGBoost achieved the highest overall performance with an accuracy of 88.10% and an F1-Score of 44.44%. Feature importance analysis revealed that overtime, stock option level, monthly income, and employee satisfaction were significant factors influencing employee attrition.
+
+---
+
+# Chapter 1: Introduction
+
+## 1.1 Background
+
+Employee attrition refers to the reduction of employees in an organization due to resignation, retirement, or termination. High attrition rates can negatively affect business performance, increase operational costs, and reduce organizational productivity. Therefore, companies need effective methods to identify employees who are likely to leave so that preventive measures can be taken.
+
+Machine Learning provides powerful techniques for analyzing employee data and predicting future attrition trends. By utilizing historical employee records, organizations can identify risk factors associated with employee turnover and improve retention strategies.
+
+## 1.2 Problem Statement
+
+Organizations often struggle to identify employees who may leave the company. Traditional methods rely heavily on manual analysis and human judgment, which may not be accurate. Therefore, a predictive model is required to forecast employee attrition based on employee-related factors.
+
+## 1.3 Objectives
+
+The main objectives of this project are:
+
+* To analyze employee data using Exploratory Data Analysis (EDA).
+* To preprocess the dataset for machine learning.
+* To train multiple machine learning models.
+* To compare model performance using evaluation metrics.
+* To identify the most important factors influencing employee attrition.
+* To recommend the best-performing model for prediction.
+
+## 1.4 Scope
+
+This project focuses on predicting employee attrition using structured employee data. The system can assist HR departments in identifying employees at risk of leaving and help organizations implement retention strategies.
+
+---
+
+# Chapter 2: Dataset Description
+
+## 2.1 Dataset Overview
+
+The project uses the IBM HR Analytics Employee Attrition dataset. The dataset contains information about employees, including demographic details, job-related information, income, work experience, and satisfaction levels.
+
+## 2.2 Dataset Characteristics
+
+* Total Records: 1470 Employees
+* Initial Features: 35
+* Target Variable: Attrition
+* Target Classes:
+
+  * Yes (Employee Left)
+  * No (Employee Stayed)
+
+## 2.3 Important Features
+
+Some important attributes in the dataset include:
+
+* Age
+* Monthly Income
+* Job Level
+* Job Satisfaction
+* Overtime
+* Years at Company
+* Years with Current Manager
+* Stock Option Level
+* Marital Status
+* Work-Life Balance
+
+---
+
+# Chapter 3: Exploratory Data Analysis (EDA)
+
+## 3.1 Data Inspection
+
+The dataset was loaded using Pandas and inspected for structure, dimensions, and data types. The first few rows were examined to understand the dataset.
+
+## 3.2 Missing Values Analysis
+
+Missing values were checked using:
+
+```python
+df.isnull().sum()
+```
+
+The dataset contained no missing values, eliminating the need for imputation.
+
+## 3.3 Constant Features
+
+The following columns contained constant values and were removed:
+
+* EmployeeCount
+* Over18
+* StandardHours
+
+These columns do not contribute to prediction and may negatively affect model performance.
+
+## 3.4 Class Distribution
+
+The target variable Attrition was analyzed to understand class distribution. The dataset showed class imbalance, where employees who stayed significantly outnumbered employees who left.
+
+---
+
+# Chapter 4: Data Preprocessing
+
+## 4.1 Target Variable Encoding
+
+The Attrition column was converted into numerical format:
+
+* No → 0
+* Yes → 1
+
+Label Encoding was used for this transformation.
+
+## 4.2 Categorical Feature Encoding
+
+Categorical features were transformed into numerical format using One-Hot Encoding.
+
+This process converted text-based categories into machine-readable binary columns.
+
+## 4.3 Feature Scaling
+
+StandardScaler was applied to normalize numerical features and ensure consistent scaling across all variables.
+
+## 4.4 Handling Class Imbalance
+
+Since the dataset was imbalanced, SMOTE (Synthetic Minority Oversampling Technique) was applied.
+
+SMOTE generates synthetic samples for the minority class, helping models learn patterns more effectively.
+
+---
+
+# Chapter 5: Model Development
+
+Four machine learning algorithms were implemented and evaluated.
+
+## 5.1 Logistic Regression
+
+Logistic Regression is a statistical classification algorithm used for binary prediction tasks.
+
+Advantages:
+
+* Simple and interpretable
+* Fast training
+
+## 5.2 Decision Tree
+
+Decision Tree creates a hierarchical structure of decisions based on feature values.
+
+Advantages:
+
+* Easy visualization
+* Handles non-linear relationships
+
+## 5.3 Random Forest
+
+Random Forest combines multiple decision trees to improve prediction accuracy and reduce overfitting.
+
+Advantages:
+
+* High accuracy
+* Robust performance
+
+## 5.4 XGBoost
+
+XGBoost is an advanced boosting algorithm that sequentially improves prediction performance.
+
+Advantages:
+
+* High accuracy
+* Excellent handling of complex patterns
+* Strong performance on structured datasets
+
+---
+
+# Chapter 6: Model Evaluation
+
+The models were evaluated using the following metrics:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+
+## 6.1 Results Comparison
+
+| Model               | Accuracy | Precision | Recall | F1 Score |
+| ------------------- | -------- | --------- | ------ | -------- |
+| Logistic Regression | 76.53%   | 29.73%    | 56.41% | 38.94%   |
+| Decision Tree       | 82.99%   | 35.90%    | 35.90% | 35.90%   |
+| Random Forest       | 87.76%   | 61.54%    | 20.51% | 30.77%   |
+| XGBoost             | 88.10%   | 58.33%    | 35.90% | 44.44%   |
+
+## 6.2 Discussion
+
+The results indicate that XGBoost achieved the highest overall performance with an accuracy of 88.10% and the highest F1-Score of 44.44%.
+
+Random Forest achieved the highest precision, while Logistic Regression achieved the highest recall. However, considering the balance between precision and recall, XGBoost demonstrated superior overall performance.
+
+---
+
+# Chapter 7: Feature Importance Analysis
+
+Feature importance analysis was conducted using the Random Forest model.
+
+## Top 10 Important Features
+
+| Feature              | Importance |
+| -------------------- | ---------- |
+| OverTime_Yes         | 0.128735   |
+| StockOptionLevel     | 0.055097   |
+| YearsWithCurrManager | 0.045862   |
+| MonthlyIncome        | 0.040018   |
+| YearsAtCompany       | 0.037925   |
+| JobSatisfaction      | 0.037598   |
+| YearsInCurrentRole   | 0.036922   |
+| MaritalStatus_Single | 0.036906   |
+| JobLevel             | 0.035167   |
+| Age                  | 0.034589   |
+
+## Analysis
+
+The most influential factor affecting employee attrition was Overtime. Employees working overtime were more likely to leave the company. Other significant factors included stock option level, manager relationship duration, income level, and job satisfaction.
+
+These findings suggest that workload, compensation, career growth, and workplace relationships play a crucial role in employee retention.
+
+---
+
+# Chapter 8: Conclusion and Future Work
+
+## Conclusion
+
+This project successfully developed a machine learning-based employee attrition prediction system using the IBM HR Analytics dataset.
+
+The dataset was analyzed, cleaned, encoded, scaled, and balanced using SMOTE. Four machine learning models were trained and evaluated. XGBoost emerged as the best-performing model with an accuracy of 88.10% and the highest F1-Score.
+
+Feature importance analysis revealed that overtime, stock option level, monthly income, job satisfaction, and years with the current manager significantly influence employee attrition.
+
+The developed system can assist HR departments in identifying employees who are likely to leave and help organizations implement proactive retention strategies.
+
+## Future Work
+
+Future improvements may include:
+
+* Hyperparameter tuning for improved performance.
+* Deep learning approaches for enhanced prediction accuracy.
+* Integration with real-time HR management systems.
+* Development of a web-based dashboard for HR professionals.
+* Implementation of explainable AI techniques such as SHAP for better interpretability.
+
+---
+
+# References
+
+1. IBM HR Analytics Employee Attrition Dataset.
+2. Scikit-Learn Documentation.
+3. XGBoost Documentation.
+4. Pandas Documentation.
+5. Imbalanced-Learn Documentation.
+6. Python Data Science Libraries Documentation.
